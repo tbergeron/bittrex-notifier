@@ -16,3 +16,6 @@ var settings = {
     ]
 };
 ```
+
+# How to run
+`node index.js`

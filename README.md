@@ -1,5 +1,7 @@
 # bittrex-notifier
 Know when your coins goes UP!
+Built with Node.js 
+(don't forget to run `npm install` before trying to run this script)
 
 # Config example
 

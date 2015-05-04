@@ -1,0 +1,23 @@
+{
+  "name": "bittrex-notifier",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "request": "^2.55.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tbergeron/bittrex-notifier.git"
+  },
+  "author": "Tommy Bergeron",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tbergeron/bittrex-notifier/issues"
+  },
+  "homepage": "https://github.com/tbergeron/bittrex-notifier"
+}

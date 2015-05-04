@@ -1,7 +1,7 @@
 var settings = {
-    delay : 1, // minutes
-    verbose: false,
-    warning_threshold : 1.25, // 1.%%
+    delay : 15, // minutes
+    verbose: true,
+    warning_threshold : 1.10, // 1.%%
     invested_markets : [
         {
             'market_name' : 'BTC-UTC',
@@ -9,8 +9,12 @@ var settings = {
         },
         {
             'market_name' : 'BTC-EKN',
-            'my_bid' : 0.00001600
+            'my_bid' : 0.00004600
         },
+        {
+            'market_name' : 'BTC-XEM',
+            'my_bid' : 0.00000062
+        }
     ]
 };
 
@@ -29,16 +33,18 @@ setInterval(function() {
 checkUpdates();
 
 function checkUpdates() {
+        v('-');
+        v(now());
+        v('-');
         settings.invested_markets.forEach(function(market) {
         getCurrentMarketDetails(market.market_name, function(details) {
-            v('Fetching ' + market.market_name + '...');
             // calculate change percentage
             var diff = details.Last / market.my_bid;
-            v('Difference (' + details.Last.toFixed(8) + '/' + market.my_bid.toFixed(8) + ') = ' + diff + '%');
+            v(market.market_name + ': ' + diff.toFixed(2) + '% (' + details.Last.toFixed(8) + '/' + market.my_bid.toFixed(8) + ')');
             // if percentage is higher than warning threshold, notify
             if (diff > settings.warning_threshold) {
                 v('Diff (' + diff + ') is over threshold (' + settings.warning_threshold + ')!');
-                console.log('[*] You should check out ' + market.market_name + '! ' + now());
+                console.log('[*] You should check out ' + market.market_name + '! ' + diff.toFixed(0) + 'x! (' + details.Last.toFixed(8) + '/' + market.my_bid.toFixed(8) + ') ' + now());
             }
         });
     });

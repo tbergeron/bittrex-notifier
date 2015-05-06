@@ -13,7 +13,7 @@ var settings = {
         },
         {
             'market_name' : 'BTC-XEM',
-            'my_bid' : 0.0000062
+            'my_bid' : 0.00000062
         }
     ]
 };
@@ -34,14 +34,14 @@ setInterval(function() {
 checkUpdates();
 
 function checkUpdates() {
-        v('-'.hidden);
+        v('');
         v(now().cyan);
-        v('-'.hidden);
+        v('');
         settings.invested_markets.forEach(function(market) {
         getCurrentMarketDetails(market.market_name, function(details) {
             // calculate change percentage
             var diff = details.Last / market.my_bid;
-            v(market.market_name + ' ' + diff.toFixed(2).yellow + '%'.yellow + ' ' + details.Last.toFixed(8) + ' / ' + market.my_bid.toFixed(8));
+            v(market.market_name.bold + ' ' + colorizePercentage(diff) + ' ' + details.Last.toFixed(8) + ' / ' + market.my_bid.toFixed(8));
             // if percentage is higher than warning threshold, notify
             if (diff > settings.warning_threshold) {
                 console.log('[*] ' + 'PROFITS!!!'.rainbow.bgWhite + ' ' + market.market_name + ' is ' + diff.toFixed(0) + 'x! (' + details.Last.toFixed(8) + '/' + market.my_bid.toFixed(8) + ') @ ' + now());
@@ -76,5 +76,22 @@ function now() {
 function v(msg) {
     if (settings.verbose) {
         console.log('[v] ' + msg);
+    }
+}
+
+function colorizePercentage(percentage) {
+    var split_percentage = percentage.toFixed(2).toString().split('.'),
+        decimals = split_percentage[1],
+        difference = 100 - decimals,
+        difference = difference.toString(),
+        difference = (difference.length == 1) ? difference + ' ' : difference,
+        operator = '';
+
+    if (percentage > 1) {
+        operator = '+';
+        return ' '.bgWhite + operator.bgWhite.green + difference.bgWhite.green + '%'.bgWhite.green + ' '.bgWhite;
+    } else {
+        operator = '-';
+        return ' '.bgWhite + operator.bgWhite.red + difference.bgWhite.red + '%'.bgWhite.red + ' '.bgWhite;
     }
 }

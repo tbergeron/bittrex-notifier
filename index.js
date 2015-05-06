@@ -22,7 +22,7 @@ function checkUpdates() {
         getCurrentMarketDetails(market.market_name, function(details) {
             // calculate change percentage
             var diff = details.Last / market.my_bid;
-            v(pad(market.market_name).bold + ' ' + colorizePercentage(diff) + ' ' + details.Last.toFixed(8) + ' / ' + market.my_bid.toFixed(8));
+            v(pad(market.market_name).bold + ' | ' + colorizePercentage(diff) + ' | LAST: ' + details.Last.toFixed(8) + ' | YOU: ' + market.my_bid.toFixed(8));
             // if percentage is higher than warning threshold, notify
             if (diff > settings.warning_threshold) {
                 console.log('[*] ' + 'PROFITS!!!'.rainbow.bgWhite + ' ' + market.market_name + ' is ' + diff.toFixed(0) + 'x! (' + details.Last.toFixed(8) + '/' + market.my_bid.toFixed(8) + ') @ ' + now());

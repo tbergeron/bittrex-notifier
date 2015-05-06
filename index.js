@@ -1,24 +1,5 @@
-var settings = {
-    delay : 15, // minutes
-    verbose: true,
-    warning_threshold : 1.10, // 1.%%
-    invested_markets : [
-        {
-            'market_name' : 'BTC-UTC',
-            'my_bid' : 0.00001163
-        },
-        {
-            'market_name' : 'BTC-EKN',
-            'my_bid' : 0.00004600
-        },
-        {
-            'market_name' : 'BTC-XEM',
-            'my_bid' : 0.00000062
-        }
-    ]
-};
-
-var colors = require('colors'),
+var settings = require('./settings'),
+    colors = require('colors'),
     request = require('request');
 
 var host = 'http://bittrex.brainpad.org',

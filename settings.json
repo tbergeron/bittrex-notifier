@@ -1,0 +1,19 @@
+{
+    "delay" : 15,
+    "verbose" : true,
+    "warning_threshold" : 1.10,
+    "invested_markets" : [
+        {
+            "market_name" : "BTC-UTC",
+            "my_bid" : 0.00001163
+        },
+        {
+            "market_name" : "BTC-EKN",
+            "my_bid" : 0.00004600
+        },
+        {
+            "market_name" : "BTC-XEM",
+            "my_bid" : 0.00000062
+        }
+    ]
+}

@@ -80,18 +80,27 @@ function v(msg) {
 }
 
 function colorizePercentage(percentage) {
-    var split_percentage = percentage.toFixed(2).toString().split('.'),
-        decimals = split_percentage[1],
-        difference = 100 - decimals,
-        difference = difference.toString(),
-        difference = (difference.length == 1) ? difference + ' ' : difference,
-        operator = '';
+    var split_percentage = percentage.toFixed(2).toString().split('.');
+        multiplier = split_percentage[0],
+        decimals = split_percentage[1];
 
     if (percentage > 1) {
-        operator = '+';
+        var operator = '+';
+
+        if (percentage.toFixed(0) > 1) {
+                var difference = percentage.toFixed(0) * 100,
+                difference = difference.toString();
+        } else {
+            var difference = decimals.toString();
+        }
+        
         return ' '.bgWhite + operator.bgWhite.green + difference.bgWhite.green + '%'.bgWhite.green + ' '.bgWhite;
     } else {
-        operator = '-';
+        var difference = 100 - decimals,
+            difference = difference.toString(),
+            difference = (difference.length == 1) ? difference + ' ' : difference,
+            operator = '-';
+            
         return ' '.bgWhite + operator.bgWhite.red + difference.bgWhite.red + '%'.bgWhite.red + ' '.bgWhite;
     }
 }

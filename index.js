@@ -22,7 +22,7 @@ function checkUpdates() {
         getCurrentMarketDetails(market.market_name, function(details) {
             // calculate change percentage
             var diff = details.Last / market.my_bid;
-            v(market.market_name.bold + ' ' + colorizePercentage(diff) + ' ' + details.Last.toFixed(8) + ' / ' + market.my_bid.toFixed(8));
+            v(pad(market.market_name).bold + ' ' + colorizePercentage(diff) + ' ' + details.Last.toFixed(8) + ' / ' + market.my_bid.toFixed(8));
             // if percentage is higher than warning threshold, notify
             if (diff > settings.warning_threshold) {
                 console.log('[*] ' + 'PROFITS!!!'.rainbow.bgWhite + ' ' + market.market_name + ' is ' + diff.toFixed(0) + 'x! (' + details.Last.toFixed(8) + '/' + market.my_bid.toFixed(8) + ') @ ' + now());
@@ -84,4 +84,11 @@ function colorizePercentage(percentage) {
             
         return ' '.bgWhite + operator.bgWhite.red + difference.bgWhite.red + '%'.bgWhite.red + ' '.bgWhite;
     }
+}
+
+function pad(string, width, padding) {
+    if (!width) width = 8;
+    if (!padding) padding = ' ';
+    
+    return (width <= string.length) ? string : pad(width, padding + string, padding)
 }

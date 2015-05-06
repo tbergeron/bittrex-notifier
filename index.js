@@ -13,12 +13,13 @@ var settings = {
         },
         {
             'market_name' : 'BTC-XEM',
-            'my_bid' : 0.00000062
+            'my_bid' : 0.0000062
         }
     ]
 };
 
-var request = require('request');
+var colors = require('colors'),
+    request = require('request');
 
 var host = 'http://bittrex.brainpad.org',
     markets_api_uri = '/api/get_markets',
@@ -33,18 +34,17 @@ setInterval(function() {
 checkUpdates();
 
 function checkUpdates() {
-        v('-');
-        v(now());
-        v('-');
+        v('-'.hidden);
+        v(now().cyan);
+        v('-'.hidden);
         settings.invested_markets.forEach(function(market) {
         getCurrentMarketDetails(market.market_name, function(details) {
             // calculate change percentage
             var diff = details.Last / market.my_bid;
-            v(market.market_name + ': ' + diff.toFixed(2) + '% (' + details.Last.toFixed(8) + '/' + market.my_bid.toFixed(8) + ')');
+            v(market.market_name + ' ' + diff.toFixed(2).yellow + '%'.yellow + ' ' + details.Last.toFixed(8) + ' / ' + market.my_bid.toFixed(8));
             // if percentage is higher than warning threshold, notify
             if (diff > settings.warning_threshold) {
-                v('Diff (' + diff + ') is over threshold (' + settings.warning_threshold + ')!');
-                console.log('[*] You should check out ' + market.market_name + '! ' + diff.toFixed(0) + 'x! (' + details.Last.toFixed(8) + '/' + market.my_bid.toFixed(8) + ') ' + now());
+                console.log('[*] ' + 'PROFITS!!!'.rainbow.bgWhite + ' ' + market.market_name + ' is ' + diff.toFixed(0) + 'x! (' + details.Last.toFixed(8) + '/' + market.my_bid.toFixed(8) + ') @ ' + now());
             }
         });
     });

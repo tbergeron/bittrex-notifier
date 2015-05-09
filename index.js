@@ -77,11 +77,13 @@ function colorizePercentage(percentage) {
         
         return ' '.bgWhite + operator.bgWhite.green + difference.bgWhite.green + '%'.bgWhite.green + ' '.bgWhite;
     } else {
+        
         var difference = 100 - decimals,
+            difference = (difference == 100) ? '00' : difference,
             difference = difference.toString(),
             difference = (difference.length == 1) ? difference + ' ' : difference,
             operator = '-';
-            
+
         return ' '.bgWhite + operator.bgWhite.red + difference.bgWhite.red + '%'.bgWhite.red + ' '.bgWhite;
     }
 }
